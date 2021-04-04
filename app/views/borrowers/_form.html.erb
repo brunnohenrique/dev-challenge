@@ -1,28 +1,37 @@
-<%= form_with(model: borrower) do |form| %>
-  <% if borrower.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(borrower.errors.count, "error") %> prohibited this borrower from being saved:</h2>
+<%= simple_form_for @borrower do |f| %>
+  <%= f.input :legal_name, required: false %>
+  <%= f.input :cnpj %>
 
-      <ul>
-        <% borrower.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+  <div class="section">
+    <h5>Phone(s)</h5>
+    <div class="card horizontal">
+      <div class="card-stacked">    
+        <%= f.simple_fields_for :phones do |phone| %>
+          <%= render 'phone_fields', f: phone %>
         <% end %>
-      </ul>
+        <div class="card-action">        
+          <div class='col s2 pull-s10'><%= link_to_add_association 'add phone', f, :phones %></div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :legal_name %>
-    <%= form.text_field :legal_name %>
   </div>
 
-  <div class="field">
-    <%= form.label :cnpj %>
-    <%= form.text_field :cnpj %>
-  </div>
+  <div class="section">
+    <h5>Address(es)</h5>
+    <div class="card horizontal">
+      <div class="card-stacked">     
+        <%= f.simple_fields_for :addresses do |address| %>
+          <%= render 'address_fields', f: address %>
+        <% end %>
+        <div class="card-action">        
+          <div class='col s2 pull-s10'><%= link_to_add_association 'add address', f, :addresses %></div>
+        </div>
+      </div>
+    </div>
+  </div>  
 
-  <div class="actions">
-    <i class="material-icons right"><%= form.submit :Submit, class: 'btn waves-effect waves-light' %></i>
-    <i class="material-icons right"><%= link_to 'Back', borrowers_path, class: 'btn waves-effect deep-orange-2' %></i>
+  <div class='row'>
+    <div class='col s2 offset-s8'><%= link_to custom_icon('keyboard_arrow_left', 'back'), borrowers_path, class: 'btn waves-effect deep-orange-2' %></div>
+    <div class='col s2'><%= f.button :submit, class: 'btn waves-effect waves-light' %></div>
   </div>
 <% end %>

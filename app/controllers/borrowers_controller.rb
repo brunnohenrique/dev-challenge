@@ -14,6 +14,8 @@ class BorrowersController < ApplicationController
 
   def new
     @borrower = Borrower.new
+    @borrower.phones.build
+    @borrower.addresses.build
     respond_with(@borrower)
   end
 
@@ -37,11 +39,15 @@ class BorrowersController < ApplicationController
   end
 
   private
-    def set_borrower
-      @borrower = Borrower.find(params[:id])
-    end
+  def set_borrower
+    @borrower = Borrower.find(params[:id])
+  end
 
-    def borrower_params
-      params.require(:borrower).permit(:legal_name, :cnpj)
-    end
+  def borrower_params
+    params.require(:borrower).permit(
+      :legal_name, :cnpj,
+      phones_attributes: [:id, :number, :tag, :_destroy],
+      addresses_attributes: [:id, :street, :complement, :district, :city, :state, :zipcode, :_destroy]
+    )
+  end
 end

@@ -1,0 +1,15 @@
+<div class="card-content nested-fields">
+  <div class='row'>
+    <div class='col s11'><%= f.input :street %></div>
+    <div class='col s1'><%= link_to_remove_association delete_icon_nested, f %></div>
+  </div>
+  <div class='row'>
+    <div class='col s6'><%= f.input :complement %></div>
+    <div class='col s6'><%= f.input :district %></div>
+  </div>
+  <div class='row'>
+    <div class='col s6'><%= f.input :city %></div>
+    <div class='col s3'><%= f.input :state %></div>
+    <div class='col s3'><%= f.input :zipcode %></div>
+  </div>
+</div>

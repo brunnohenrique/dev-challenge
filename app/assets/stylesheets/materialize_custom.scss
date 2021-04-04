@@ -1,3 +1,15 @@
+@import "materialize/components/color-variables";
+$primary-color: color("purple", "lighten-2") !default;
+$secondary-color: color("teal", "base") !default;
+@import 'materialize';
+
 .deep-orange-2 {
   background: #ff6e40;
+}
+span.remove-nested {
+  font-size: 36px;
+}
+a.btn {
+  vertical-align: middle;
+  display: inline-flex;
 }
